@@ -1,0 +1,1 @@
+# solana-metrics-mcp-server
