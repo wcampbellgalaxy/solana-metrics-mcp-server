@@ -28,7 +28,11 @@ const INFLUX_TOKEN = process.env.INFLUX_TOKEN || 'your_influxdb_token';
 const INFLUX_ORG = process.env.INFLUX_ORG || '';
 const INFLUX_BUCKET = process.env.INFLUX_BUCKET || 'sol_metrics';
 
-// Initialize InfluxDB client
+// Note: This server supports both InfluxDB v1 and v2
+// For v1, we'll use direct HTTP queries; for v2, we'll use the client library
+const INFLUX_VERSION = process.env.INFLUX_VERSION || 'v1'; // default to v1
+
+// Initialize InfluxDB client (for v2)
 const influxDB = new InfluxDB({ url: INFLUX_URL, token: INFLUX_TOKEN });
 const queryApi = influxDB.getQueryApi(INFLUX_ORG);
 
@@ -132,64 +136,140 @@ interface GrafanaDashboard {
 }
 
 // Helper functions
+//existing code...
+
+// Helper function to query InfluxDB v1
+async function queryInfluxV1(query: string, database: string = INFLUX_BUCKET): Promise<any> {
+  try {
+    const url = new URL('/query', INFLUX_URL);
+    url.searchParams.append('q', query);
+    if (database) {
+      url.searchParams.append('db', database);
+    }
+
+    const response = await fetch(url.toString());
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('InfluxDB v1 query error:', error);
+    throw error;
+  }
+}
+
 async function getMetricsList(): Promise<string[]> {
   try {
-    const query = `
-      import "influxdata/influxdb/schema"
-      schema.measurements(bucket: "${INFLUX_BUCKET}")
-    `;
-    
-    const metrics: string[] = [];
-    await queryApi.queryRows(query, {
-      next(row, tableMeta) {
-        const o = tableMeta.toObject(row);
-        if (o._value && typeof o._value === 'string') {
-          metrics.push(o._value);
+    if (INFLUX_VERSION === 'v1') {
+      // Use InfluxDB v1 API
+      const result = await queryInfluxV1('SHOW MEASUREMENTS');
+      const measurements: string[] = [];
+      
+      if (result.results && result.results[0] && result.results[0].series) {
+        const series = result.results[0].series[0];
+        if (series && series.values) {
+          measurements.push(...series.values.map((v: any[]) => v[0]));
         }
-      },
-      error(error) {
-        console.error('Error querying metrics:', error);
-      },
-      complete() {
-        console.log('Metrics query completed');
-      },
-    });
-    
-    return metrics;
+      }
+      
+      return measurements;
+    } else {
+      // Use InfluxDB v2 API
+      const query = `
+        import "influxdata/influxdb/schema"
+        schema.measurements(bucket: "${INFLUX_BUCKET}")
+      `;
+      
+      const metrics: string[] = [];
+      await queryApi.queryRows(query, {
+        next(row, tableMeta) {
+          const o = tableMeta.toObject(row);
+          if (o._value && typeof o._value === 'string') {
+            metrics.push(o._value);
+          }
+        },
+        error(error) {
+          console.error('Error querying metrics:', error);
+        },
+        complete() {
+          console.log('Metrics query completed');
+        },
+      });
+      
+      return metrics;
+    }
   } catch (error) {
-    console.error('Failed to get metrics list:', error);
+    console.error('Error querying metrics:', error);
     return [];
   }
 }
 
 async function getMetricDetails(metricName: string): Promise<any> {
   try {
-    const query = `
-      from(bucket: "${INFLUX_BUCKET}")
-        |> range(start: -1h)
-        |> filter(fn: (r) => r._measurement == "${metricName}")
-        |> limit(n: 1)
-        |> yield()
-    `;
-    
-    const details: any = {};
-    await queryApi.queryRows(query, {
-      next(row, tableMeta) {
-        const o = tableMeta.toObject(row);
-        Object.keys(o).forEach(key => {
-          if (key.startsWith('_') || key === 'table' || key === 'result') return;
-          details[key] = o[key];
-        });
-      },
-      error(error) {
-        console.error(`Error querying metric ${metricName}:`, error);
-      },
-      complete() {
-        console.log(`Metric ${metricName} details query completed`);
-      },
-    });
-    
-    return details;
+    if (INFLUX_VERSION === 'v1') {
+      // Use InfluxDB v1 API - get recent data and field info
+      const queries = [
+        `SELECT * FROM "${metricName}" ORDER BY time DESC LIMIT 1`,
+        `SHOW FIELD KEYS FROM "${metricName}"`,
+        `SHOW TAG KEYS FROM "${metricName}"`
+      ];
+      
+      const details: any = { measurement: metricName };
+      
+      for (const query of queries) {
+        try {
+          const result = await queryInfluxV1(query);
+          if (result.results && result.results[0]) {
+            const res = result.results[0];
+            if (res.series && res.series[0]) {
+              const series = res.series[0];
+              if (query.includes('FIELD KEYS')) {
+                details.fields = series.values?.map((v: any[]) => ({ name: v[0], type: v[1] })) || [];
+              } else if (query.includes('TAG KEYS')) {
+                details.tags = series.values?.map((v: any[]) => v[0]) || [];
+              } else if (query.includes('SELECT')) {
+                details.columns = series.columns || [];
+                details.recent_values = series.values?.[0] || [];
+              }
+            }
+          }
+        } catch (err) {
+          console.log(`Query failed for ${metricName}: ${query}`, err);
+        }
+      }
+      
+      return details;
+    } else {
+      // Use InfluxDB v2 API
+      const query = `
+        from(bucket: "${INFLUX_BUCKET}")
+          |> range(start: -1h)
+          |> filter(fn: (r) => r._measurement == "${metricName}")
+          |> limit(n: 1)
+          |> yield()
+      `;
+      
+      const details: any = {};
+      await queryApi.queryRows(query, {
+        next(row, tableMeta) {
+          const o = tableMeta.toObject(row);
+          Object.keys(o).forEach(key => {
+            if (key.startsWith('_') || key === 'table' || key === 'result') return;
+            details[key] = o[key];
+          });
+        },
+        error(error) {
+          console.error(`Error querying metric ${metricName}:`, error);
+        },
+        complete() {
+          console.log(`Metric ${metricName} details query completed`);
+        },
+      });
+      
+      return details;
+    }
   } catch (error) {
     console.error(`Failed to get details for metric ${metricName}:`, error);
     return {};
