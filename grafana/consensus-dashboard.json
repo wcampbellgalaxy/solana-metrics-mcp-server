@@ -1,0 +1,207 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Solana Consensus Metrics Dashboard",
+    "tags": [
+      "solana",
+      "metrics",
+      "consensus"
+    ],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "bank-get_epoch_accounts_hash_to_serialize (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"bank-get_epoch_accounts_hash_to_serialize\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "bank-get_epoch_accounts_hash_to_serialize"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "bank-new_from_parent-new_epoch_timings (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"bank-new_from_parent-new_epoch_timings\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "bank-new_from_parent-new_epoch_timings"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "bank-partitioned_epoch_rewards_credit (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"bank-partitioned_epoch_rewards_credit\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "bank-partitioned_epoch_rewards_credit"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "bank-wait_get_epoch_accounts_hash (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"bank-wait_get_epoch_accounts_hash\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "bank-wait_get_epoch_accounts_hash"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      },
+      {
+        "id": 5,
+        "title": "duplicate_confirmed_slot (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"duplicate_confirmed_slot\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "duplicate_confirmed_slot"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 6,
+        "title": "epoch-rewards-status-update (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"epoch-rewards-status-update\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "epoch-rewards-status-update"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 7,
+        "title": "epoch_rewards (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"epoch_rewards\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "epoch_rewards"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        }
+      },
+      {
+        "id": 8,
+        "title": "latest_unprocessed_votes-epoch-boundary (Consensus)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"latest_unprocessed_votes-epoch-boundary\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "latest_unprocessed_votes-epoch-boundary"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 16,
+    "version": 0
+  },
+  "folderId": null,
+  "overwrite": true
+}

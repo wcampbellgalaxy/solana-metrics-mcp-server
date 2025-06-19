@@ -1,0 +1,483 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Solana Network Metrics Dashboard",
+    "tags": [
+      "solana",
+      "metrics",
+      "network"
+    ],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Gossip (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"Gossip\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "Gossip"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Repair (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"Repair\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "Repair"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "blockstore-insert-shreds (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"blockstore-insert-shreds\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "blockstore-insert-shreds"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "broadcast-insert-shreds-interrupted-stats (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"broadcast-insert-shreds-interrupted-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "broadcast-insert-shreds-interrupted-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      },
+      {
+        "id": 5,
+        "title": "broadcast-insert-shreds-stats (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"broadcast-insert-shreds-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "broadcast-insert-shreds-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 6,
+        "title": "broadcast-process-shreds-interrupted-stats (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"broadcast-process-shreds-interrupted-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "broadcast-process-shreds-interrupted-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 7,
+        "title": "broadcast-process-shreds-stats (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"broadcast-process-shreds-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "broadcast-process-shreds-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        }
+      },
+      {
+        "id": 8,
+        "title": "broadcast-transmit-shreds-interrupted-stats (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"broadcast-transmit-shreds-interrupted-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "broadcast-transmit-shreds-interrupted-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        }
+      },
+      {
+        "id": 9,
+        "title": "broadcast-transmit-shreds-stats (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"broadcast-transmit-shreds-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "broadcast-transmit-shreds-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        }
+      },
+      {
+        "id": 10,
+        "title": "cluster_nodes_broadcast (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"cluster_nodes_broadcast\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "cluster_nodes_broadcast"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        }
+      },
+      {
+        "id": 11,
+        "title": "cluster_nodes_retransmit (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"cluster_nodes_retransmit\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "cluster_nodes_retransmit"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 40
+        }
+      },
+      {
+        "id": 12,
+        "title": "connection_cache_tpu_quic (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"connection_cache_tpu_quic\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "connection_cache_tpu_quic"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 40
+        }
+      },
+      {
+        "id": 13,
+        "title": "gossip_crds_sample (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"gossip_crds_sample\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "gossip_crds_sample"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 48
+        }
+      },
+      {
+        "id": 14,
+        "title": "quic_streamer_tpu (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"quic_streamer_tpu\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "quic_streamer_tpu"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 48
+        }
+      },
+      {
+        "id": 15,
+        "title": "quic_streamer_tpu_forwards (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"quic_streamer_tpu_forwards\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "quic_streamer_tpu_forwards"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 56
+        }
+      },
+      {
+        "id": 16,
+        "title": "quic_streamer_tpu_vote (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"quic_streamer_tpu_vote\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "quic_streamer_tpu_vote"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 56
+        }
+      },
+      {
+        "id": 17,
+        "title": "recv-window-insert-shreds (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"recv-window-insert-shreds\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "recv-window-insert-shreds"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 64
+        }
+      },
+      {
+        "id": 18,
+        "title": "repair_service-my_requests (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"repair_service-my_requests\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "repair_service-my_requests"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 64
+        }
+      },
+      {
+        "id": 19,
+        "title": "repair_service-repair_timing (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"repair_service-repair_timing\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "repair_service-repair_timing"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 72
+        }
+      },
+      {
+        "id": 20,
+        "title": "replay_stage-retransmit-timing-based (Network)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"replay_stage-retransmit-timing-based\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "replay_stage-retransmit-timing-based"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 72
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 16,
+    "version": 0
+  },
+  "folderId": null,
+  "overwrite": true
+}

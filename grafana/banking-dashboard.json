@@ -1,0 +1,483 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Solana Banking Stage Dashboard",
+    "tags": [
+      "solana",
+      "metrics",
+      "banking"
+    ],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "banking_stage-forward-us (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-forward-us\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-forward-us"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "banking_stage-forwarded_packets (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-forwarded_packets\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-forwarded_packets"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "banking_stage-leader_prioritization_fees_info (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_prioritization_fees_info\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_prioritization_fees_info"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "banking_stage-leader_slot_consume_buffered_packets_timings (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_consume_buffered_packets_timings\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_consume_buffered_packets_timings"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      },
+      {
+        "id": 5,
+        "title": "banking_stage-leader_slot_execute_and_commit_timings (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_execute_and_commit_timings\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_execute_and_commit_timings"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 6,
+        "title": "banking_stage-leader_slot_loop_timings (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_loop_timings\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_loop_timings"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 7,
+        "title": "banking_stage-leader_slot_packet_counts (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_packet_counts\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_packet_counts"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        }
+      },
+      {
+        "id": 8,
+        "title": "banking_stage-leader_slot_process_buffered_packets_timings (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_process_buffered_packets_timings\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_process_buffered_packets_timings"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        }
+      },
+      {
+        "id": 9,
+        "title": "banking_stage-leader_slot_process_packets_timings (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_process_packets_timings\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_process_packets_timings"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        }
+      },
+      {
+        "id": 10,
+        "title": "banking_stage-leader_slot_record_timings (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_record_timings\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_record_timings"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        }
+      },
+      {
+        "id": 11,
+        "title": "banking_stage-leader_slot_transaction_errors (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-leader_slot_transaction_errors\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-leader_slot_transaction_errors"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 40
+        }
+      },
+      {
+        "id": 12,
+        "title": "banking_stage-loop-stats (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-loop-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-loop-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 40
+        }
+      },
+      {
+        "id": 13,
+        "title": "banking_stage-vote_packet_counts (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage-vote_packet_counts\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage-vote_packet_counts"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 48
+        }
+      },
+      {
+        "id": 14,
+        "title": "banking_stage_scheduler_counts (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage_scheduler_counts\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage_scheduler_counts"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 48
+        }
+      },
+      {
+        "id": 15,
+        "title": "banking_stage_scheduler_leader_detection (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage_scheduler_leader_detection\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage_scheduler_leader_detection"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 56
+        }
+      },
+      {
+        "id": 16,
+        "title": "banking_stage_scheduler_slot_counts (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage_scheduler_slot_counts\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage_scheduler_slot_counts"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 56
+        }
+      },
+      {
+        "id": 17,
+        "title": "banking_stage_scheduler_slot_timing (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage_scheduler_slot_timing\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage_scheduler_slot_timing"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 64
+        }
+      },
+      {
+        "id": 18,
+        "title": "banking_stage_scheduler_timing (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage_scheduler_timing\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage_scheduler_timing"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 64
+        }
+      },
+      {
+        "id": 19,
+        "title": "banking_stage_worker_counts (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage_worker_counts\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage_worker_counts"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 72
+        }
+      },
+      {
+        "id": 20,
+        "title": "banking_stage_worker_error_metrics (Banking)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"banking_stage_worker_error_metrics\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "banking_stage_worker_error_metrics"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 72
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 16,
+    "version": 0
+  },
+  "folderId": null,
+  "overwrite": true
+}

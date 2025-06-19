@@ -1,0 +1,22 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Solana Performance Metrics Dashboard",
+    "tags": [
+      "solana",
+      "metrics",
+      "performance"
+    ],
+    "timezone": "browser",
+    "panels": [],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 16,
+    "version": 0
+  },
+  "folderId": null,
+  "overwrite": true
+}

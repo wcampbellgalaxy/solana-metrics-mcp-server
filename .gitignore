@@ -5,6 +5,5 @@ build/
 .DS_Store
 .vscode/settings.json
 
-# Generated dashboard files (keep README.md)
-grafana/*.json
-!grafana/README.md
+# Generated timestamped dashboard backups (keep main dashboard files)
+grafana/*-????-??-??T??-??-??-???Z.json

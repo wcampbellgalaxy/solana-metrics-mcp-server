@@ -1,0 +1,253 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Solana Jito MEV Dashboard",
+    "tags": [
+      "solana",
+      "metrics",
+      "jito/mev"
+    ],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "block_engine-connection_stats (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"block_engine-connection_stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "block_engine-connection_stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "block_engine_relayer-error (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"block_engine_relayer-error\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "block_engine_relayer-error"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "block_engine_relayer-loop_stats (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"block_engine_relayer-loop_stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "block_engine_relayer-loop_stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "block_engine_stage-proxy_error (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"block_engine_stage-proxy_error\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "block_engine_stage-proxy_error"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      },
+      {
+        "id": 5,
+        "title": "block_engine_stage-refresh_access_token (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"block_engine_stage-refresh_access_token\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "block_engine_stage-refresh_access_token"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 6,
+        "title": "block_engine_stage-stats (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"block_engine_stage-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "block_engine_stage-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 7,
+        "title": "block_engine_stage-tokens_generated (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"block_engine_stage-tokens_generated\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "block_engine_stage-tokens_generated"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        }
+      },
+      {
+        "id": 8,
+        "title": "bundle_stage-loop_stats (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"bundle_stage-loop_stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "bundle_stage-loop_stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        }
+      },
+      {
+        "id": 9,
+        "title": "bundle_stage-stats (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"bundle_stage-stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "bundle_stage-stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        }
+      },
+      {
+        "id": 10,
+        "title": "tachyon_bundle_stage-loop_stats (Jito/MEV)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"tachyon_bundle_stage-loop_stats\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "tachyon_bundle_stage-loop_stats"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 16,
+    "version": 0
+  },
+  "folderId": null,
+  "overwrite": true
+}

@@ -91,7 +91,7 @@ Or create a `.env` file (copy from `.env.example`).
 1. **`list_metrics`**: Lists all 1200+ metrics from your InfluxDB
 2. **`analyze_metrics`**: Categorizes metrics by Solana components (Consensus, Network, Banking, etc.)
 3. **`generate_dashboard`**: Creates Grafana dashboard JSON you can import
-4. **`search_rust_code`**: Helps find where metrics are defined in Tachyon Solana code
+4. **`search_rust_code`**: Helps find where metrics are defined in Solana code
 
 ## Sample Workflow
 

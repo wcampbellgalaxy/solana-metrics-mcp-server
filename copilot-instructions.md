@@ -4,11 +4,11 @@ This project is a Model Context Protocol (MCP) server specifically designed for 
 
 ## Project Overview
 
-The server connects to a `sol_metrics` InfluxDB database containing 1200+ metrics from Tachyon Solana nodes and provides:
+The server connects to a `sol_metrics` InfluxDB database containing 1200+ metrics from Solana nodes and provides:
 
 1. **Metric Discovery & Analysis**: Categorizes and explains Solana metrics
 2. **Grafana Dashboard Generation**: Creates importable dashboard JSON files
-3. **Code Context**: Links metrics to their Rust code definitions in Tachyon Solana
+3. **Code Context**: Links metrics to their Rust code definitions in Solana
 
 ## Key Components
 
@@ -34,7 +34,7 @@ The server categorizes metrics based on Solana's architecture:
 2. Use the MCP SDK patterns for tool implementation
 3. Maintain metric categorization accuracy based on Solana documentation
 4. Ensure Grafana dashboard compatibility
-5. Reference Tachyon Solana codebase for metric explanations
+5. Reference Solana codebase for metric explanations
 
 ## SDK Reference
 

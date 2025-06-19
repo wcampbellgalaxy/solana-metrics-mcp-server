@@ -8,7 +8,7 @@ This MCP server analyzes Solana metrics from InfluxDB and generates Grafana dash
 - **🏷️ Intelligent Categorization**: Automatically categorizes metrics into logical groups (Consensus, Network, Banking, Accounts, RPC, Performance, Jito/MEV)
 - **📊 Metric Analysis**: Provides detailed explanations of what each metric measures and why it's useful
 - **📁 Auto-Dashboard Export**: Creates and saves importable Grafana dashboard JSON files to `grafana/` folder
-- **🔎 Code Search**: Helps locate metric definitions in the Tachyon Solana Rust codebase
+- **🔎 Code Search**: Helps locate metric definitions in the Solana Rust codebase
 - **🔄 Dual InfluxDB Support**: Compatible with both InfluxDB v1 and v2
 - **🛠️ VS Code Integration**: Works seamlessly as an MCP server in Visual Studio Code
 
@@ -80,7 +80,7 @@ Generates a Grafana dashboard JSON for selected metrics.
   - `dashboard_name`: Name for the generated dashboard
 
 ### 4. `search_rust_code`
-Searches for metric definitions in the Tachyon Solana Rust codebase.
+Searches for metric definitions in the Solana Rust codebase.
 - Parameters:
   - `metric_name`: Name of the metric to search for
 
@@ -111,4 +111,4 @@ npm start
 
 ## Contributing
 
-This server is designed specifically for Tachyon Solana metrics analysis. For questions or improvements, please refer to the Solana metrics documentation and Tachyon codebase.
+This server is designed for Solana metrics analysis. For questions or improvements, please refer to the Solana metrics documentation and codebase.

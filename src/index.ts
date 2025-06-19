@@ -324,7 +324,7 @@ function categorizeMetric(metricName: string): string {
 function explainMetric(metricName: string): { explanation: string; usefulness: string; category: string } {
   const category = categorizeMetric(metricName);
   
-  // Detailed explanations based on Solana documentation and Tachyon code analysis
+  // Detailed explanations based on Solana documentation and code analysis
   const explanations: { [key: string]: { explanation: string; usefulness: string } } = {
     // Consensus metrics
     'validator_vote': {
@@ -505,7 +505,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       },
       {
         name: "search_rust_code",
-        description: "Search for metric definitions in the Tachyon Solana Rust codebase",
+        description: "Search for metric definitions in the Solana Rust codebase",
         inputSchema: {
           type: "object",
           properties: {
@@ -640,12 +640,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case "search_rust_code":
         const metricName = args?.metric_name as string;
-        // This would search through the Tachyon Solana codebase
+        // This would search through the Solana codebase
         // For now, we'll return placeholder information
         const codeSearchResult = `
 # Code Search Results for: ${metricName}
 
-## Potential Locations in Tachyon Solana Codebase:
+## Potential Locations in Solana Codebase:
 
 ### 1. Metric Definition
 \`\`\`rust
@@ -671,9 +671,9 @@ Based on the metric category (${categorizeMetric(metricName)}), this metric is l
 ### 4. Search Commands:
 \`\`\`bash
 # Search for metric definition
-grep -r "${metricName}" tachyon-solana/
+grep -r "${metricName}" solana/
 # Search for datapoint usage
-grep -r "datapoint.*${metricName}" tachyon-solana/
+grep -r "datapoint.*${metricName}" solana/
 \`\`\`
         `;
         

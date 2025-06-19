@@ -1,0 +1,69 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Solana RPC Service Dashboard",
+    "tags": [
+      "solana",
+      "metrics",
+      "rpc"
+    ],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "rpc_subscriptions (RPC)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"rpc_subscriptions\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "rpc_subscriptions"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "rpc_subscriptions_recent_items (RPC)",
+        "type": "stat",
+        "targets": [
+          {
+            "query": "from(bucket: \"sol_metrics\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"rpc_subscriptions_recent_items\") |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)",
+            "datasource": "InfluxDB"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "displayName": "rpc_subscriptions_recent_items"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 16,
+    "version": 0
+  },
+  "folderId": null,
+  "overwrite": true
+}
