@@ -11,6 +11,11 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 import { InfluxDB, Point } from '@influxdata/influxdb-client';
+import fs from 'fs';
+import path from 'path';
+
+// Get the directory where this script is located
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 // Server configuration
 const server = new Server({
@@ -136,6 +141,37 @@ interface GrafanaDashboard {
 }
 
 // Helper functions
+// Function to save dashboard JSON to file
+async function saveDashboardToFile(dashboard: GrafanaDashboard, category: string): Promise<string> {
+  try {
+    // Create grafana directory if it doesn't exist
+    const grafanaDir = path.join(__dirname, '..', 'grafana');
+    if (!fs.existsSync(grafanaDir)) {
+      fs.mkdirSync(grafanaDir, { recursive: true });
+    }
+
+    // Generate filename
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const categoryName = category.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const filename = `${categoryName}-dashboard.json`;
+    const timestampedFilename = `${categoryName}-dashboard-${timestamp}.json`;
+    
+    const filePath = path.join(grafanaDir, filename);
+    const timestampedFilePath = path.join(grafanaDir, timestampedFilename);
+
+    // Save both current and timestamped versions
+    const jsonContent = JSON.stringify(dashboard, null, 2);
+    
+    fs.writeFileSync(filePath, jsonContent, 'utf8');
+    fs.writeFileSync(timestampedFilePath, jsonContent, 'utf8');
+
+    return filePath;
+  } catch (error) {
+    console.error('Error saving dashboard to file:', error);
+    throw error;
+  }
+}
+
 //existing code...
 
 // Helper function to query InfluxDB v1
@@ -583,11 +619,21 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           overwrite: true
         };
         
+        // Save dashboard to file
+        let savedFilePath = '';
+        try {
+          savedFilePath = await saveDashboardToFile(dashboard, dashboardCategory);
+        } catch (error) {
+          console.error('Failed to save dashboard to file:', error);
+        }
+        
+        const savedMessage = savedFilePath ? `\n\n✅ **Dashboard saved to:** \`${path.basename(savedFilePath)}\`\n\nThe dashboard has been saved to the \`grafana/\` folder and can be imported directly into Grafana.` : '';
+        
         return {
           content: [
             {
               type: "text",
-              text: `# Grafana Dashboard: ${dashboardName}\n\nGenerated dashboard with ${panels.length} panels for ${dashboardCategory} metrics.\n\n\`\`\`json\n${JSON.stringify(dashboard, null, 2)}\n\`\`\``
+              text: `# Grafana Dashboard: ${dashboardName}\n\nGenerated dashboard with ${panels.length} panels for ${dashboardCategory} metrics.${savedMessage}\n\n\`\`\`json\n${JSON.stringify(dashboard, null, 2)}\n\`\`\``
             } as TextContent
           ]
         } as CallToolResult;

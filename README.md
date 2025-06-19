@@ -4,11 +4,13 @@ This MCP server analyzes Solana metrics from InfluxDB and generates Grafana dash
 
 ## Features
 
-- **Metric Discovery**: Lists all available metrics from the sol_metrics InfluxDB database
-- **Intelligent Categorization**: Automatically categorizes metrics into logical groups (Consensus, Network, Banking, Accounts, RPC, Performance, Jito/MEV)
-- **Metric Analysis**: Provides detailed explanations of what each metric measures and why it's useful
-- **Grafana Dashboard Generation**: Creates importable Grafana dashboard JSON configurations
-- **Code Search**: Helps locate metric definitions in the Tachyon Solana Rust codebase
+- **🔍 Metric Discovery**: Lists all available metrics from the sol_metrics InfluxDB database
+- **🏷️ Intelligent Categorization**: Automatically categorizes metrics into logical groups (Consensus, Network, Banking, Accounts, RPC, Performance, Jito/MEV)
+- **📊 Metric Analysis**: Provides detailed explanations of what each metric measures and why it's useful
+- **📁 Auto-Dashboard Export**: Creates and saves importable Grafana dashboard JSON files to `grafana/` folder
+- **🔎 Code Search**: Helps locate metric definitions in the Tachyon Solana Rust codebase
+- **🔄 Dual InfluxDB Support**: Compatible with both InfluxDB v1 and v2
+- **🛠️ VS Code Integration**: Works seamlessly as an MCP server in Visual Studio Code
 
 ## Installation
 
@@ -26,7 +28,25 @@ export INFLUX_URL="http://your-influxdb-server:8086"
 export INFLUX_TOKEN="your_token"
 export INFLUX_ORG="your_org"
 export INFLUX_BUCKET="sol_metrics"
+export INFLUX_VERSION="v1"  # or "v2" for InfluxDB v2
 ```
+
+## Dashboard Export
+
+When you generate dashboards using the `generate_dashboard` tool, the server automatically:
+
+1. **Saves JSON files** to the `grafana/` folder in your project directory
+2. **Creates timestamped backups** for version history
+3. **Provides ready-to-import** Grafana dashboard configurations
+
+Generated dashboard files:
+- `consensus-dashboard.json` - Epoch rewards, slot confirmation, validator voting
+- `network-dashboard.json` - Gossip, cluster info, retransmit metrics
+- `banking-dashboard.json` - Transaction processing, prioritization fees
+- `accounts-dashboard.json` - Account database, cache, hashing metrics
+- `rpc-dashboard.json` - RPC service and subscription metrics
+- `performance-dashboard.json` - CPU, memory, disk usage metrics
+- `jito-mev-dashboard.json` - Block engine, bundle processing, MEV relayer metrics
 
 ## Usage with Claude Desktop
 

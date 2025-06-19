@@ -4,3 +4,7 @@ build/
 *.log
 .DS_Store
 .vscode/settings.json
+
+# Generated dashboard files (keep README.md)
+grafana/*.json
+!grafana/README.md
