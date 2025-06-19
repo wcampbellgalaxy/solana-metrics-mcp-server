@@ -218,7 +218,7 @@
       },
       {
         "id": 10,
-        "title": "tachyon_bundle_stage-loop_stats (Jito/MEV)",
+        "title": "Bundle Stage Loop Stats (Jito/MEV)",
         "type": "stat",
         "targets": [
           {
@@ -229,7 +229,7 @@
         "fieldConfig": {
           "defaults": {
             "unit": "short",
-            "displayName": "tachyon_bundle_stage-loop_stats"
+            "displayName": "bundle_stage_loop_stats"
           }
         },
         "gridPos": {
